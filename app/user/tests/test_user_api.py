@@ -2,7 +2,6 @@
 Tests for the user API.
 """
 
-from venv import create
 from django.test import TestCase
 from django.contrib.auth import get_user_model
 from django.urls import reverse
@@ -68,7 +67,10 @@ class PublicUserApiTests(TestCase):
 
         self.assertEqual(res.status_code, status.HTTP_400_BAD_REQUEST)
 
-        user_exists = get_user_model().objects.filter(email=payload["email"]).exists()
+        user_exists = get_user_model().objects.filter(
+            email=payload["email"]
+            ).exists()
+            
         self.assertFalse(user_exists)
 
     def test_create_token_for_user(self):
